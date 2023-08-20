@@ -7,10 +7,16 @@ ans = []
 # 탐색용 인덱스
 i = 0
 
-while len(ans) < N:
+while True:
     ans.append(i+1)
+
+    # 모두 풍선이 터지면 종료
+    if len(ans) == N:
+        break
+
     # step 저장
     step = arr[i]
+
     # 터진 풍선 표시
     arr[i] = 0
 
@@ -27,4 +33,4 @@ while len(ans) < N:
             # 안 터진 풍선만 cnt 감소
             if arr[i]: cnt -= 1
 
-print(ans)
+print(*ans)
