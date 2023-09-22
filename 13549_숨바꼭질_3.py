@@ -1,3 +1,61 @@
+# 풀이 4. [112ms] BFS 재시도
+from collections import deque
+
+def bfs():
+    q = deque([N])
+    visited[N] = 1
+
+    while q:
+        v = q.popleft()
+        vv = 2*v
+        if vv <= 100000 and not visited[vv]:
+            q.append(vv)
+            visited[vv] = visited[v]
+        for w in [v-1, v+1]:
+            if 0 <= w <= 100000 and not visited[w]:
+                q.append(w)
+                visited[w] = visited[v] + 1
+
+
+N, K = map(int, input().split())
+visited = [0] * 100001
+bfs()
+print(visited[K] - 1)
+
+
+
+# # 풀이 3. [128ms] Dijkstra
+# import heapq
+
+# def dijkstra(start):
+#     heap = []
+#     W[start] = 0
+#     heapq.heappush(heap, (W[start], start))
+
+#     while heap:
+#         dist, v = heapq.heappop(heap)
+        
+#         if v == K: return
+
+#         if dist <= W[v]:
+#             for w in [v-1, v+1]:
+#                 if 0 <= w <= 100000 and W[w] > dist + 1:
+#                     W[w] = dist + 1
+#                     heapq.heappush(heap, (W[w], w))
+#             vv = 2*v
+#             if 0 <= vv <= 100000 and W[vv] > dist:
+#                 W[vv] = dist
+#                 heapq.heappush(heap, (W[vv], vv))
+
+
+# N, K = map(int, input().split())
+
+# W = [987654321] * 100001
+# dijkstra(N)
+# print(W[K])
+
+
+
 # # 풀이 2. [시간 초과] Dijkstra with no heap
 # def dijkstra(start):
 #     T[start] = 0
