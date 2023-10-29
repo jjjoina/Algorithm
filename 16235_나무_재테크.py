@@ -27,16 +27,6 @@ for _ in range(K):
                     # 나이가 1 증가한다.
                     gnd[i][j][t] += 1
 
-    # # <여름>
-    # # 봄에 죽은 나무가 양분으로 변한다.
-    # # dead_trees 역순으로 순회
-    # for idx in range(len(dead_trees)-1, -1, -1):
-    #     i, j, t = dead_trees[idx]
-    #     # (죽은 나무의 나이 // 2)만큼 양분 증가
-    #     food[i][j] += gnd[i][j][t] // 2
-    #     # 죽은 나무 arr에서 pop
-    #     gnd[i][j].pop()
-
     # <가을>
     # 나무 전체 순회
     for i in range(N):
