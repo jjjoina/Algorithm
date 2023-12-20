@@ -51,10 +51,12 @@
 
 
 
-# 풀이 1. [PyPy 2600ms] [Python 초과] DFS -> [PyPy 368ms] [Python 840ms] 가지치기 추가
+# 풀이 1. [PyPy 2600ms] [Python 초과] DFS
+#      -> [PyPy 368ms] [Python 840ms] 가지치기 추가
+#      -> [PyPy 208ms] [Python 192ms] 凸 모양 처리 수정
 import sys; input = sys.stdin.readline
 
-def dfs(i, j, depth, cur_sum):
+def dfs(i, j, depth, cur_sum):  # depth: 현재까지 고른 개수 / i,j: 탐색 기준점
     global ans
 
     # 가지치기 (나머지 선택에서 모두 최대값을 골라도 ans에 못 미치는 경우)
@@ -71,30 +73,9 @@ def dfs(i, j, depth, cur_sum):
         if 0 <= ni < N and 0 <= nj < M and visited[ni][nj] == 0:    # 방문하지 않은 칸
             visited[ni][nj] = 1
             dfs(ni, nj, depth+1, cur_sum+arr[ni][nj])
+            if depth == 2:  # 凸 모양 처리
+                dfs(i, j, depth+1, cur_sum+arr[ni][nj]) # ㄱ자든 ㅣ자든 2번째 칸으로 돌아가게 된다.
             visited[ni][nj] = 0
-
-
-def cheol(i, j):
-    global ans
-
-    around = []
-    cnt = 0
-    s = arr[i][j]
-    for di, dj in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
-        ni, nj = i+di, j+dj
-        if 0 <= ni < N and 0 <= nj < M:
-            around.append(arr[ni][nj])
-            cnt += 1
-            s += arr[ni][nj]
-
-    if cnt == 3:
-        if ans < s:
-            ans = s
-
-    elif cnt == 4:
-        s -= min(around)
-        if ans < s:
-            ans = s
 
 
 N, M = map(int, input().split())
@@ -106,10 +87,8 @@ max_v = max(map(max, arr))
 
 for i in range(N):
     for j in range(M):
-        visited[i][j] = 1
-        dfs(i, j, 0, 0)
-        visited[i][j] = 0
-
-        cheol(i, j)
+        visited[i][j] = 1   # 선택
+        dfs(i, j, 1, arr[i][j]) # 하나 고른 상태
+        visited[i][j] = 0   # 원복
 
 print(ans)
