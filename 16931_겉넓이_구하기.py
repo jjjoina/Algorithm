@@ -9,6 +9,8 @@ for i in range(1, N+1):
     for j in range(1, M+1):
         for di, dj in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
             ni, nj = i+di, j+dj
-            ans += max(arr[i][j]-arr[ni][nj], 0)
+            diff = arr[i][j] - arr[ni][nj]
+            if diff > 0:
+                ans += diff
 
 print(ans)
