@@ -1,6 +1,4 @@
-import sys; input = sys.stdin.readline
-
-is_first_test_case = True
+import sys; input = sys.stdin.readlineZ
 
 def comb(i, start):
     if i == 6:
@@ -17,11 +15,8 @@ while True:
     lst = list(map(int, input().split()))
     if lst[0] == 0:
         break
-    
-    if is_first_test_case:
-        is_first_test_case = False
-    else:
-        print()
 
     c = []
     comb(0, 1)
+    
+    print()
