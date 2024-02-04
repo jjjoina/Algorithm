@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Main {
+public class BOJ7696 {
     public static boolean isNotRepeating(int cnt) {
         int used = 0;   // 비트마스킹
         while (cnt > 0) {
