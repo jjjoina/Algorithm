@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class BOJ15658 {
     static int max_ans = Integer.MIN_VALUE;
     static int min_ans = Integer.MAX_VALUE;
 
