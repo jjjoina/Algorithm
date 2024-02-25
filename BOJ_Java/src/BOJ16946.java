@@ -2,10 +2,10 @@ import java.io.*;
 import java.util.*;
 
 public class BOJ16946 {
-    static class Point {
+    static class Node {
         int i, j;
 
-        public Point(int i, int j) {
+        public Node(int i, int j) {
             this.i = i;
             this.j = j;
         }
@@ -17,7 +17,7 @@ public class BOJ16946 {
 
         @Override
         public boolean equals(Object obj) {
-            Point p = (Point) obj;
+            Node p = (Node) obj;
             return p.i == this.i && p.j == this.j;
         }
     }
@@ -29,24 +29,24 @@ public class BOJ16946 {
     static int[] dj = {1, 0, -1, 0};
 
     public static void bfs(int si, int sj) {
-        Queue<Point> q = new ArrayDeque<>();
-        Set<Point> walls = new HashSet<>();
+        Queue<Node> q = new ArrayDeque<>();
+        Set<Node> walls = new HashSet<>();
         int cnt = 1;
 
-        q.offer(new Point(si, sj));
+        q.offer(new Node(si, sj));
         visited[si][sj] = true;
 
         while (!q.isEmpty()) {
-            Point p = q.poll();
+            Node v = q.poll();
             for (int d = 0; d < 4; d++) {
-                int ni = p.i + di[d];
-                int nj = p.j + dj[d];
+                int ni = v.i + di[d];
+                int nj = v.j + dj[d];
                 if (0 <= ni && ni < N && 0 <= nj && nj < M) {
                     if (arr[ni][nj] > 0) {
-                        walls.add(new Point(ni, nj));
+                        walls.add(new Node(ni, nj));
                     }
                     else if (!visited[ni][nj]) {
-                        q.offer(new Point(ni, nj));
+                        q.offer(new Node(ni, nj));
                         visited[ni][nj] = true;
                         cnt++;
                     }
@@ -54,8 +54,8 @@ public class BOJ16946 {
             }
         }
 
-        for (Point w : walls) {
-            arr[w.i][w.j] += cnt;
+        for (Node v : walls) {
+            arr[v.i][v.j] += cnt;
         }
     }
 
