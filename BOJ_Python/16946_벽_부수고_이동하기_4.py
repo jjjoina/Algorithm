@@ -3,7 +3,7 @@ from collections import deque
 
 def bfs(si, sj):
     q = deque()
-    walls = set()
+    walls = []
     cnt = 1     # 이어져있는 0의 개수
     
     q.append([si, sj])
@@ -13,9 +13,10 @@ def bfs(si, sj):
         i, j = q.popleft()
         for di, dj in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
             ni, nj = i+di, j+dj
-            if 0 <= ni < N and 0 <= nj < M:
+            if 0 <= ni < N and 0 <= nj < M and visited[ni][nj] == 0:
                 if arr[ni][nj] > 0:     # 벽을 만난 경우
-                    walls.add((ni, nj))
+                    walls.append([ni, nj])
+                    visited[ni][nj] = 1
                 
                 elif visited[ni][nj] == 0:  # 아직 탐색하지 않은 빈 칸을 만난 경우
                     q.append([ni, nj])
@@ -25,6 +26,7 @@ def bfs(si, sj):
     # 이어져있던 0의 개수를 만났던 벽에 카운트
     for w in walls:
         arr[w[0]][w[1]] += cnt
+        visited[w[0]][w[1]] = 0
 
 
 N, M = map(int, input().split())
