@@ -9,17 +9,6 @@ public class BOJ16946 {
             this.i = i;
             this.j = j;
         }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(i, j);
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            Node p = (Node) obj;
-            return p.i == this.i && p.j == this.j;
-        }
     }
 
     static int N, M;
@@ -41,11 +30,12 @@ public class BOJ16946 {
             for (int d = 0; d < 4; d++) {
                 int ni = v.i + di[d];
                 int nj = v.j + dj[d];
-                if (0 <= ni && ni < N && 0 <= nj && nj < M) {
+                if (0 <= ni && ni < N && 0 <= nj && nj < M && !visited[ni][nj]) {
                     if (arr[ni][nj] > 0) {
                         walls.add(new Node(ni, nj));
+                        visited[ni][nj] = true;
                     }
-                    else if (!visited[ni][nj]) {
+                    else {
                         q.offer(new Node(ni, nj));
                         visited[ni][nj] = true;
                         cnt++;
@@ -56,6 +46,7 @@ public class BOJ16946 {
 
         for (Node v : walls) {
             arr[v.i][v.j] += cnt;
+            visited[v.i][v.j] = false;
         }
     }
 
