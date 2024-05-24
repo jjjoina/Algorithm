@@ -1,4 +1,4 @@
-# 풀이 1. [48ms] DP
+# 풀이 2. [48ms] DP
 
 def solve():
     if is_square[N]:
