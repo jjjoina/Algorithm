@@ -1,3 +1,4 @@
+# 풀이 1. [시간 초과] dfs
 import sys; input = sys.stdin.readline
 
 def dfs(v, t):
