@@ -1,4 +1,5 @@
 import sys; input = sys.stdin.readline
+import math
 
 N = int(input())
 edges = [list(map(int, input().split())) for _ in range(N-1)]
@@ -15,7 +16,8 @@ for u, v in edges:
 g = 0
 for v in range(1, N+1):
     if adj_cnts[v] >= 3:
-        g += adj_cnts[v] * (adj_cnts[v] - 1) * (adj_cnts[v] - 2) // 6
+        # g += adj_cnts[v] * (adj_cnts[v] - 1) * (adj_cnts[v] - 2) // 6
+        g += math.comb(adj_cnts[v], 3)
 
 if d > 3 * g:
     print('D')
