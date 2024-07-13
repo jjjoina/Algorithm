@@ -3,7 +3,7 @@ import heapq
 
 problems_hard = []
 problems_easy = []
-solved = set()
+# solved = set()
 levels = [0] * 100001
 
 N = int(input())
@@ -19,7 +19,8 @@ for _ in range(M):
 
     if command[0] == 'recommend':
         problems = problems_hard if command[1] == '1' else problems_easy
-        while (abs(problems[0][1]), abs(problems[0][0])) in solved:
+        # while (abs(problems[0][1]), abs(problems[0][0])) in solved:
+        while levels[abs(problems[0][1])] != abs(problems[0][0]):   # 이미 푼 문제인 경우
             heapq.heappop(problems)
         print(abs(problems[0][1]))
 
@@ -32,4 +33,5 @@ for _ in range(M):
 
     else:
         P = int(command[1])
-        solved.add((P, levels[P]))
+        # solved.add((P, levels[P]))
+        levels[P] = 0
