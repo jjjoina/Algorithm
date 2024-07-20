@@ -1,21 +1,30 @@
 import sys; input = sys.stdin.readline
 
 N, d, k, c = map(int, input().split())
-belt = [int(input()) for _ in range(N)]
+lst = [int(input()) for _ in range(N)]
 
-dic = {}
-ans = 0
-# 모든 경우의 수를 조사
-for i in range(N):
-    if i >= k:
-        dic[belt[i-k]] -= 1
-        if dic[belt[i-k]] == 0:
-            dic.pop(belt[i-k])
+kind = 1
+cnt = [0] * (d+1)
+cnt[c] = 1
+for i in range(k):
+    cnt[lst[i]] += 1
+    if cnt[lst[i]] == 1:
+        kind += 1
+ans = kind
 
-    dic[belt[i]] = dic.get(belt[i], 0) + 1
-    
-    rst = len(dic)
-    if c not in dic: rst += 1
-    ans = max(ans, rst)
+for i in range(N-1):
+    old = lst[i]
+    new = lst[(i+k) % N]
+
+    cnt[old] -= 1
+    if cnt[old] == 0:
+        kind -= 1
+
+    cnt[new] += 1
+    if cnt[new] == 1:
+        kind += 1
+
+    if ans < kind:
+        ans = kind
 
 print(ans)
