@@ -22,7 +22,7 @@ T = int(input())
 for _ in range(T):
     functions = input().strip()
     n = int(input())
-    s = input().strip()[1:-1].split(',')
+    s = input().strip('\n[]').split(',')
     dq = deque(s) if n else deque()
 
     print(run())
