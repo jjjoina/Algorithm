@@ -1,29 +1,28 @@
 import sys; input = sys.stdin.readline
 from collections import deque
 
-def AC(lst):
-    for f in p:
+def run():
+    sign = True
+    for f in functions:
         if f == 'R':
-            # 배열 뒤집기
-            lst = deque(list(lst)[::-1])
+            sign = not sign
         else:
-            if lst:
-                # 첫 번째 수 버리기
-                lst.popleft()
-            else:
+            if not dq:
                 return 'error'
-    
-    return list(lst)
+
+            if sign:
+                dq.popleft()
+            else:
+                dq.pop()
+
+    return f'[{",".join(dq if sign else reversed(dq))}]'
 
 
 T = int(input())
 for _ in range(T):
-    p = input().strip() # 함수
+    functions = input().strip()
     n = int(input())
-    lst = input().strip().strip('[]')
-    if lst:
-        lst = deque(map(int, lst.split(',')))
-    else:   # 현재 lst = []
-        lst = deque()
+    s = input().strip()[1:-1].split(',')
+    dq = deque(s) if n else deque()
 
-    print(AC(lst))
+    print(run())
