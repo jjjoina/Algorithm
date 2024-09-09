@@ -8,7 +8,7 @@ def back_tracking(team, opponent):
         ans = 1
         return
 
-    for wdl in range(3):    # win-draw_lose
+    for wdl in range(3):    # win-draw-lose
         opponent_wdl = 2 - wdl
 
         tmp_result[team][wdl] += 1
